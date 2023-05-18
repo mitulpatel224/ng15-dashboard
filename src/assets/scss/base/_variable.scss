@@ -1,3 +1,13 @@
+:root {
+  --client-primary: #dedee1;
+  --client-secondary: #9da4ad;
+  --client-accent: #dff368;
+  --client-body-bg: #101321;
+  --client-aside-bg: #000000;
+  --client-border-color: #313543;
+  --client-nav-pills-link-active-bg: #232733;
+}
+
 $font-family: "Montserrat", sans-serif;
 
 // Utilities
@@ -5,3 +15,4 @@ $enable-negative-margins: true;
 
 // Card
 $card-border-width: 0;
+$card-bg: transparent;
