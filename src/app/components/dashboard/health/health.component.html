@@ -1,0 +1,12 @@
+<table class="table w-100">
+  <tbody>
+    <ng-container *ngFor="let item of data">
+      <tr class="border-bottom border-2">
+        <th scope="row" class="text-client-primary fs-5 p-1">
+          {{ item?.title }}
+        </th>
+        <td class="p-1">{{ item?.value }}</td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
