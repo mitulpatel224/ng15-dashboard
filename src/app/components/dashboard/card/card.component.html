@@ -1,23 +1,27 @@
-<div class="card overflow-hidden" style="height: 250px">
+<div #card class="card overflow-hidden" style="height: 250px">
   <div class="card-body">
     <div class="d-flex align-items-center justify-content-between">
-      <h4 class="card-title">Card Title</h4>
+      <h4 class="card-title">{{ cardTitle }}</h4>
       <div>
         <ul class="nav">
-          <li class="nav-item">
-            <a href="#" class="nav-link px-2 link-secondary"
-              ><span class="icon icon-fullscreen"></span
-            ></a>
+          <li *ngIf="enableFullscreen" class="nav-item">
+            <a
+              (click)="toggleFullscreen(card)"
+              class="nav-link px-2 link-secondary"
+              role="button"
+            >
+              <span class="icon icon-fullscreen"></span>
+            </a>
+          </li>
+          <li *ngIf="enableSetting" class="nav-item">
+            <a href="#" class="nav-link px-2 link-secondary" role="button">
+              <span class="icon icon-settings"></span>
+            </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link px-2 link-secondary"
-              ><span class="icon icon-settings"></span
-            ></a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link px-2 link-secondary"
-              ><span class="icon icon-help"></span
-            ></a>
+            <a href="#" class="nav-link px-2 link-secondary" role="button">
+              <span class="icon icon-help"></span>
+            </a>
           </li>
         </ul>
       </div>
