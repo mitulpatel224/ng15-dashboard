@@ -15,7 +15,14 @@
       class="col-12 col-md-6 col-lg-4 p-3 border border-bottom-0 border-end-0"
     >
       <app-card cardTitle="Tasks">
-        <app-pie-chart></app-pie-chart>
+        <canvas
+          baseChart
+          [type]="'doughnut'"
+          [data]="tasks.data"
+          [options]="tasks.options"
+          [plugins]="pieChartPlugins"
+        >
+        </canvas>
       </app-card>
     </div>
     <div
@@ -31,9 +38,14 @@
       class="col-12 col-md-6 col-lg-4 p-3 border border-bottom-0 border-end-0"
     >
       <app-card cardTitle="Time">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste ipsam,
-        iusto laudantium molestiae vero enim culpa non molestias nam illum natus
-        maxime accusantium pariatur, inventore ab voluptates illo id tenetur.
+        <canvas
+          baseChart
+          [type]="'doughnut'"
+          [data]="tasks.data"
+          [options]="tasks.options"
+          [plugins]="pieChartPlugins"
+        >
+        </canvas>
       </app-card>
     </div>
     <div
