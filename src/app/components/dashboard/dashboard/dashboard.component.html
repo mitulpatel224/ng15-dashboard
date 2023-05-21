@@ -1,8 +1,6 @@
 <div class="container-fluid h-100 pb-3">
   <div class="row h-100">
-    <div
-      class="col-12 col-md-6 col-lg-4 p-3 border border-bottom-0 border-end-0"
-    >
+    <div class="col-12 col-md-6 col-lg-4 border border-bottom-0 border-end-0">
       <app-card
         cardTitle="Health"
         [enableFullscreen]="false"
@@ -11,59 +9,67 @@
         <app-health></app-health>
       </app-card>
     </div>
-    <div
-      class="col-12 col-md-6 col-lg-4 p-3 border border-bottom-0 border-end-0"
-    >
+    <div class="col-12 col-md-6 col-lg-4 border border-bottom-0 border-end-0">
       <app-card cardTitle="Tasks">
         <canvas
+          *ngIf="tasks"
           baseChart
+          [id]="'tasks'"
           [type]="'doughnut'"
           [data]="tasks.data"
           [options]="tasks.options"
-          [plugins]="pieChartPlugins"
-        >
-        </canvas>
+          [plugins]="[paddingBelowLegends]"
+        ></canvas>
       </app-card>
     </div>
-    <div
-      class="col-12 col-md-6 col-lg-4 p-3 border border-bottom-0 border-end-0"
-    >
+    <div class="col-12 col-md-6 col-lg-4 border border-bottom-0 border-end-0">
       <app-card cardTitle="Progress">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste ipsam,
-        iusto laudantium molestiae vero enim culpa non molestias nam illum natus
-        maxime accusantium pariatur, inventore ab voluptates illo id tenetur.
+        <canvas
+          *ngIf="progress"
+          baseChart
+          [type]="progress.type"
+          [data]="progress.data"
+          [options]="progress.options"
+          [plugins]="[paddingBelowLegends]"
+        ></canvas>
       </app-card>
     </div>
-    <div
-      class="col-12 col-md-6 col-lg-4 p-3 border border-bottom-0 border-end-0"
-    >
+    <div class="col-12 col-md-6 col-lg-4 border border-bottom-0 border-end-0">
       <app-card cardTitle="Time">
         <canvas
+          *ngIf="time"
+          [id]="'time'"
           baseChart
-          [type]="'doughnut'"
-          [data]="tasks.data"
-          [options]="tasks.options"
-          [plugins]="pieChartPlugins"
-        >
-        </canvas>
+          [type]="time.type"
+          [data]="time.data"
+          [options]="time.options"
+          [plugins]="[paddingBelowLegends]"
+        ></canvas>
       </app-card>
     </div>
-    <div
-      class="col-12 col-md-6 col-lg-4 p-3 border border-bottom-0 border-end-0"
-    >
+    <div class="col-12 col-md-6 col-lg-4 border border-bottom-0 border-end-0">
       <app-card cardTitle="Cost">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste ipsam,
-        iusto laudantium molestiae vero enim culpa non molestias nam illum natus
-        maxime accusantium pariatur, inventore ab voluptates illo id tenetur.
+        <canvas
+          *ngIf="cost"
+          baseChart
+          [id]="'cost'"
+          [type]="cost.type"
+          [data]="cost.data"
+          [options]="cost.options"
+          [plugins]="[paddingBelowLegends, chartAreaBorder]"
+        ></canvas>
       </app-card>
     </div>
-    <div
-      class="col-12 col-md-6 col-lg-4 p-3 border border-bottom-0 border-end-0"
-    >
+    <div class="col-12 col-md-6 col-lg-4 border border-bottom-0 border-end-0">
       <app-card cardTitle="Workload">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste ipsam,
-        iusto laudantium molestiae vero enim culpa non molestias nam illum natus
-        maxime accusantium pariatur, inventore ab voluptates illo id tenetur.
+        <canvas
+          *ngIf="workload"
+          baseChart
+          id="workload"
+          [data]="workload.data"
+          [options]="workload.options"
+          [plugins]="[paddingBelowLegends, chartAreaBorder]"
+        ></canvas>
       </app-card>
     </div>
   </div>
