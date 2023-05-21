@@ -40,3 +40,16 @@ h5,
 h6 {
   @extend .text-client-primary;
 }
+
+// TODO: Flex in fullscreen
+:-webkit-full-screen,
+:-ms-fullscreen,
+:fullscreen {
+  .card {
+    display: flex;
+    flex-direction: column;
+    .card-text {
+      flex-grow: 1;
+    }
+  }
+}
