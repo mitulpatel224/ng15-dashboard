@@ -4,11 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  },
-  {
-    path: 'dashboard',
     loadComponent: () =>
       import('./components/dashboard/dashboard/dashboard.component').then(
         (c) => c.DashboardComponent
