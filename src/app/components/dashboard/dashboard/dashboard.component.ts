@@ -95,23 +95,29 @@ export class DashboardComponent {
           label: 'Actual',
           data: [3200],
           backgroundColor: ['#69c66a'],
-          barPercentage: 0.5,
+          barThickness: 50,
         },
         {
           label: 'Planned',
           data: [4510],
           backgroundColor: ['#50cbc2'],
-          barPercentage: 0.5,
+          barThickness: 50,
         },
         {
           label: 'Budget',
           data: [6000],
           backgroundColor: ['#42abf5'],
-          barPercentage: 0.5,
+          barThickness: 50,
         },
       ],
     },
     options: {
+      elements: {
+        bar: {
+          borderWidth: { left: 5, right: 5 },
+          borderColor: 'transparent',
+        },
+      },
       scales: {
         x: {
           border: {
@@ -289,6 +295,10 @@ export class DashboardComponent {
           border: {
             display: false,
           },
+          ticks: {
+            crossAlign: 'far',
+            padding: 15,
+          },
         },
         x: {
           border: {
@@ -311,71 +321,56 @@ export class DashboardComponent {
         datalabels: {
           align: 'start',
           anchor: 'start',
+          color: (context: any) => {
+            return context.dataset.data.map(
+              (data: { category: string; value: number }, i: number) => {
+                return data.value > 70
+                  ? '#6acb66'
+                  : data.value > 40
+                  ? '#f8a847'
+                  : data.value > 10
+                  ? '#e0589d'
+                  : '#808490';
+              }
+            );
+          },
           formatter: (value: any) => {
-            return value.value;
+            return value.value + '%';
           },
         },
       },
     },
   };
 
-  public time: ChartConfiguration<
-    'bar',
-    { category: string; value: number }[]
-  > = {
+  public time: ChartConfiguration<'bar'> = {
     type: 'bar',
     data: {
-      labels: [
-        'Contract',
-        'Design',
-        'Procurement',
-        'Construction',
-        'Post Construction',
-        'Project Closed',
-      ],
+      labels: ['Planned Completion', 'Actual Completion', 'Ahead', '', '', ''],
       datasets: [
         {
-          label: 'Progress',
-          data: [
-            {
-              category: 'Contract',
-              value: 100,
-            },
-            {
-              category: 'Design',
-              value: 80,
-            },
-            {
-              category: 'Procurement',
-              value: 19,
-            },
-            {
-              category: 'Construction',
-              value: 0,
-            },
-            {
-              category: 'Post Construction',
-              value: 0,
-            },
-            {
-              category: 'Project Closed',
-              value: 0,
-            },
-          ],
-          backgroundColor(bgColor: any) {
-            const val = bgColor.raw.value;
-            let color =
-              val > 70
-                ? '#6acb66'
-                : val > 40
-                ? '#f8a847'
-                : val > 10
-                ? '#e0589d'
-                : '#808490';
-            return color;
-          },
-          minBarLength: 5,
-          barPercentage: 0.4,
+          label: 'Actual',
+          data: [],
+          // barThickness: 25,
+          backgroundColor: '#3facf4',
+          barPercentage: 1,
+          categoryPercentage: 1,
+          stack: '1',
+        },
+        {
+          label: 'Behind',
+          data: [],
+          // barThickness: 25,
+          backgroundColor: '#f7a651',
+          categoryPercentage: 1,
+          stack: '2',
+        },
+        {
+          label: 'On Time',
+          data: [0, 14, 14],
+          // barThickness: 25,
+          backgroundColor: '#66ce6a',
+          categoryPercentage: 1,
+          stack: '1',
         },
       ],
     },
@@ -383,16 +378,22 @@ export class DashboardComponent {
       indexAxis: 'y',
       scales: {
         y: {
-          border: {
+          grid: {
             display: false,
           },
         },
         x: {
+          min: -100,
+          max: 100,
+          stacked: true,
+          ticks: {
+            stepSize: 25,
+            callback: (val: any) => Math.abs(val),
+          },
           border: {
             display: false,
           },
           grid: {
-            display: false,
             drawTicks: false,
           },
         },
@@ -402,12 +403,14 @@ export class DashboardComponent {
         yAxisKey: 'category',
       },
       plugins: {
-        legend: { display: false },
         datalabels: {
           align: 'start',
           anchor: 'start',
           formatter: (value: any) => {
-            return value.value;
+            return `${value}%`;
+          },
+          color(context: any) {
+            return context.dataset.backgroundColor;
           },
         },
       },
