@@ -1,0 +1,57 @@
+.client-body {
+  --bs-link-color: var(--client-secondary);
+  --bs-border-color: var(--client-border-color);
+  --bs-body-color: var(--client-secondary);
+  --bs-body-bg: var(--client-body-bg);
+  // color: var(--client-secondary);
+  // background-color: var(--client-body-bg);
+}
+.client-aside-bg {
+  background-color: var(--client-aside-bg);
+}
+.text-client-primary {
+  color: var(--client-primary);
+}
+.text-client-secondary {
+  color: var(--client-secondary);
+}
+
+.aside {
+  @extend .client-aside-bg;
+}
+body {
+  @extend .client-body;
+}
+.nav-pills .nav-link {
+  --bs-nav-link-color: var(--client-secondary);
+  --bs-nav-link-active-color: var(--client-secondary);
+  --bs-nav-pills-link-active-color: var(--client-secondary);
+  --bs-nav-link-hover-color: var(--client-accent);
+  &.active {
+    border: 2px solid var(--client-accent);
+    --bs-nav-link-color: var(--client-secondary);
+    --bs-nav-pills-link-active-bg: var(--client-nav-pills-link-active-bg);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @extend .text-client-primary;
+}
+
+// TODO: Flex in fullscreen
+:-webkit-full-screen,
+:-ms-fullscreen,
+:fullscreen {
+  .card {
+    display: flex;
+    flex-direction: column;
+    .card-text {
+      flex-grow: 1;
+    }
+  }
+}
