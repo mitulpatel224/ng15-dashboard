@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -17,7 +23,10 @@ export class CardComponent {
   @Input() public enableFullscreen: boolean = true;
   @Input() public enableSetting: boolean = true;
 
+  @ViewChild('contentWrapper') contentWrapper!: ElementRef;
   private fullscreenEnabled: boolean = false;
+
+  constructor(private renderer2: Renderer2) {}
 
   public toggleFullscreen(elem: any) {
     if (this.fullscreenEnabled) {
@@ -31,12 +40,15 @@ export class CardComponent {
     this.fullscreenEnabled = true;
     if (elem?.requestFullscreen) {
       elem?.requestFullscreen();
+      this.toggleElementHeight('700px');
     } else if (elem?.webkitRequestFullscreen) {
       /* Safari */
       elem?.webkitRequestFullscreen();
+      this.toggleElementHeight('700px');
     } else if (elem?.msRequestFullscreen) {
       /* IE11 */
       elem?.msRequestFullscreen();
+      this.toggleElementHeight('700px');
     }
   }
 
@@ -45,10 +57,21 @@ export class CardComponent {
     const elem = document as any;
     if (elem?.exitFullscreen) {
       elem?.exitFullscreen();
+      this.toggleElementHeight('300px');
     } else if (elem?.mozCancelFullScreen) {
       elem?.mozCancelFullScreen();
+      this.toggleElementHeight('300px');
     } else if (elem?.webkitExitFullscreen) {
       elem?.webkitExitFullscreen();
+      this.toggleElementHeight('300px');
     }
+  }
+
+  private toggleElementHeight(height: string) {
+    this.renderer2.setStyle(
+      this.contentWrapper.nativeElement,
+      'height',
+      height
+    );
   }
 }

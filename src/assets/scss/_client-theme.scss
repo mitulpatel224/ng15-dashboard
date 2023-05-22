@@ -1,8 +1,10 @@
 .client-body {
-  color: var(--client-secondary);
   --bs-link-color: var(--client-secondary);
-  background-color: var(--client-body-bg);
   --bs-border-color: var(--client-border-color);
+  --bs-body-color: var(--client-secondary);
+  --bs-body-bg: var(--client-body-bg);
+  // color: var(--client-secondary);
+  // background-color: var(--client-body-bg);
 }
 .client-aside-bg {
   background-color: var(--client-aside-bg);
