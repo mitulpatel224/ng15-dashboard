@@ -1,9 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ChartConfiguration, Plugin } from 'chart.js';
+import { Chart, ChartConfiguration, Plugin, registerables } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { NgChartsModule } from 'ng2-charts';
 import { CardComponent } from '../../card/card.component';
 import { HealthComponent } from '../health/health.component';
+
+Chart.register(...registerables, ChartDataLabels);
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.pointStyle = 'circle';
+Chart.defaults.plugins.legend.labels.padding = 20;
+Chart.defaults.plugins.legend.align = 'start';
+Chart.defaults.color = '#adadad';
+Chart.defaults.maintainAspectRatio = false;
+Chart.defaults.aspectRatio = 1;
+Chart.defaults.responsive = true;
+Chart.defaults.font.size = 14;
+Chart.defaults.scale.grid.color = '#222533';
 
 const paddingBelowLegends: Plugin<'doughnut' | 'bar'> = {
   id: 'paddingBelowLegends',
@@ -16,22 +29,6 @@ const paddingBelowLegends: Plugin<'doughnut' | 'bar'> = {
   },
 };
 
-const chartAreaBorder: Plugin<'bar'> = {
-  id: 'chartAreaBorder',
-  beforeDraw(chart: any, options: any) {
-    const {
-      ctx,
-      chartArea: { left, top, width, height },
-    } = chart;
-    ctx.save();
-    ctx.strokeStyle = options['borderColor'] || '#101320';
-    ctx.lineWidth = options['borderWidth'] || 10;
-    ctx.setLineDash(options['borderDash'] || []);
-    ctx.lineDashOffset = options['borderDashOffset'];
-    ctx.strokeRect(left, top, width, height);
-    ctx.restore();
-  },
-};
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -41,7 +38,6 @@ const chartAreaBorder: Plugin<'bar'> = {
 })
 export class DashboardComponent {
   public paddingBelowLegends = paddingBelowLegends;
-  public chartAreaBorder = chartAreaBorder;
 
   public tasks: ChartConfiguration<'doughnut'> = {
     type: 'doughnut',
@@ -120,6 +116,7 @@ export class DashboardComponent {
       },
       scales: {
         x: {
+          display: false,
           border: {
             display: false,
           },
@@ -135,13 +132,6 @@ export class DashboardComponent {
               return (val as number) / 1000 + 'k';
             },
           },
-        },
-      },
-      bar: {
-        datasets: {
-          barPercentage: 0.5,
-          barThickness: 1,
-          borderColor: '',
         },
       },
       plugins: {
