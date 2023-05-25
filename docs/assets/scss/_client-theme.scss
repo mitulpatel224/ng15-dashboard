@@ -1,3 +1,21 @@
+[data-theme="dark"] {
+  --client-primary: #dedee1;
+  --client-secondary: #9da4ad;
+  --client-accent: #dff368;
+  --client-body-bg: #101321;
+  --client-aside-bg: #000000;
+  --client-border-color: #222533;
+  --client-nav-pills-link-active-bg: #232733;
+}
+[data-theme="light"] {
+  --client-primary: #101321;
+  --client-secondary: #222533;
+  --client-accent: #dff368;
+  --client-body-bg: #ffffff;
+  --client-aside-bg: #efecdf;
+  --client-border-color: #aaaaaa;
+  --client-nav-pills-link-active-bg: #d1d1d1;
+}
 .client-body {
   --bs-link-color: var(--client-secondary);
   --bs-border-color: var(--client-border-color);
@@ -35,6 +53,14 @@ body {
   }
 }
 
+.dropdown-toggle {
+  &::after {
+    content: "";
+    border: 0;
+    margin: 0;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -42,6 +68,11 @@ h4,
 h5,
 h6 {
   @extend .text-client-primary;
+}
+
+.form-check-input:checked {
+  background-color: var(--client-body-bg);
+  border-color: var(--client-accent);
 }
 
 // TODO: Flex in fullscreen
